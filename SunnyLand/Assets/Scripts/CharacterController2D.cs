@@ -8,7 +8,7 @@ public class CharacterController2D : MonoBehaviour
     [Header("Movement")]
     public float hSpeed = 5f;
     public float vSpeed = 10f;
-    private float direction = 0;
+    protected float direction = 0;
 
     [Header("Better Jumping")]
     public float fallMultiplier = 2f;
@@ -21,19 +21,18 @@ public class CharacterController2D : MonoBehaviour
     public bool onRightWall = false;
     public bool onLeftWall = false;
     public bool facingRight = true;
-    private bool jump = false;
-
+    public bool jump = false;
+  
     [Header("Collisions")]
     [SerializeField] private Vector2 bottomOffset = new Vector2(0, -0.5f);
     [SerializeField] private Vector2 rightOffset = new Vector2(0.25f, 0);
     [SerializeField] private Vector2 leftOffset = new Vector2(-0.25f, 0);
     [SerializeField] private float collisionRadius = 0.25f;
-    [SerializeField] private LayerMask groundLayer;
+    public LayerMask groundLayer;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        tr = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody2D>();        
     }
 
     private void Update()
@@ -78,7 +77,7 @@ public class CharacterController2D : MonoBehaviour
     void Flip()
     {
         facingRight = !facingRight;
-        tr.localScale = new Vector3(-tr.localScale.x, tr.localScale.y, tr.localScale.z);
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     void AirControl()
@@ -122,7 +121,7 @@ public class CharacterController2D : MonoBehaviour
 
         //Personagem esta no chao e parado e NÃO esta tentando pular 
         if (isOnFloor && direction == 0 && !Input.GetButton("Jump"))
-        {   
+        {
             // Verifica se está em uma inclinação
             if (hit && Mathf.Abs(hit.normal.x) > 0.1f)
             {
@@ -139,12 +138,9 @@ public class CharacterController2D : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
             //Move Player up or down to compensate for the slope below them
-            if (hit && Mathf.Abs(hit.normal.x) > 0.1f)
-            {
-                Vector3 newPosition = transform.position;
-                newPosition.y += -hit.normal.x * Mathf.Abs(rb.velocity.x) * Time.fixedDeltaTime * (rb.velocity.x - hit.normal.x > 0 ? 1 : -1);
-                transform.position = newPosition;
-            }
+            Vector3 newPosition = transform.position;
+            newPosition.y += -hit.normal.x * Mathf.Abs(rb.velocity.x) * Time.fixedDeltaTime * (rb.velocity.x - hit.normal.x > 0 ? 1 : -1);
+            transform.position = newPosition;
         }
     }
 }
