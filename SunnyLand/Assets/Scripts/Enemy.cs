@@ -36,12 +36,13 @@ public class Enemy : MonoBehaviour
         {
             health -= damage;
             damageEffect.SetFlashDamage();
-            
+            AudioManager.am.PlayFx(2, AudioManager.am.audioClips[1]);
 
             if (health <= 0)
             {
                 Instantiate(explosion, transform.position, Quaternion.identity);
                 Destroy(gameObject);
+                AudioManager.am.PlayFx(1, AudioManager.am.audioClips[0]);
             }
 
             Invoke("SetInvulnerableFalse", 1f);

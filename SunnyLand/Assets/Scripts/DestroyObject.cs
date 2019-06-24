@@ -8,4 +8,6 @@ public class DestroyObject : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+    
 }

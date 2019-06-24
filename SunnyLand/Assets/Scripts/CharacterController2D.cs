@@ -35,7 +35,7 @@ public class CharacterController2D : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();        
     }
 
-    private void Update()
+    public virtual void Update()
     {
         direction = Input.GetAxisRaw("Horizontal");
 

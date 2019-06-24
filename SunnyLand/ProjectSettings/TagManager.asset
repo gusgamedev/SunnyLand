@@ -17,7 +17,7 @@ TagManager:
   - Player
   - Enemy
   - Collectable
-  - 
+  - Parallax
   - 
   - 
   - 
@@ -40,4 +40,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2602238433
+    locked: 0
+  - name: Decorative
+    uniqueID: 1892333071
+    locked: 0
+  - name: Enemy
+    uniqueID: 1635212839
+    locked: 0
+  - name: Item
+    uniqueID: 3713244413
+    locked: 0
+  - name: Player
+    uniqueID: 4012257883
+    locked: 0
+  - name: Foreground
+    uniqueID: 2062880109
     locked: 0
