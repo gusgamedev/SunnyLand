@@ -15,6 +15,7 @@ public class CharacterController2D : MonoBehaviour
     public float lowJumpMultiplier = 5f;
 
     [Header("Booleans")]
+    public bool isAlive = true;
     public bool isOnFloor = false;
     public bool isJumping = false;
     public bool isFalling = false;
@@ -37,19 +38,27 @@ public class CharacterController2D : MonoBehaviour
 
     public virtual void Update()
     {
-        direction = Input.GetAxisRaw("Horizontal");
+        if (isAlive)
+        {
+            direction = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump") && isOnFloor)
-            jump = true;
+            if (Input.GetButtonDown("Jump") && isOnFloor)
+                jump = true;
 
-        CheckSlope();
-        AirControl();
-        BetterJump();
-        CheckColisions();
+            CheckSlope();
+            AirControl();
+            BetterJump();
+            CheckColisions();
+        }
+        else
+        {
+            Debug.Log("aqui");
+            direction = 0;            
+        }
     }
 
     private void FixedUpdate()
-    {
+    {        
         rb.velocity = new Vector2(hSpeed * direction, rb.velocity.y);
                 
         if (jump)
@@ -60,15 +69,16 @@ public class CharacterController2D : MonoBehaviour
 
         if ((direction < 0 && facingRight) || (direction > 0 && !facingRight))
             Flip();
+        
     }
 
     void BetterJump()
     {
-        if (rb.velocity.y < 0)
+        if (rb.velocity.y < 0 && !isOnFloor)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (rb.velocity.y > 0 && !Input.GetButton("Jump") && !isOnFloor)
         {
             rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
@@ -82,12 +92,12 @@ public class CharacterController2D : MonoBehaviour
 
     void AirControl()
     {
-        if (rb.velocity.y > 0f && !isOnFloor)
+        if (rb.velocity.y > 0.1f && !isOnFloor)
         {
             isJumping = true;
             isFalling = false;
         }
-        else if (rb.velocity.y < 0f && !isOnFloor)
+        else if (rb.velocity.y < -0.1f && !isOnFloor)
         {
             isJumping = false;
             isFalling = true;

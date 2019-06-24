@@ -19,13 +19,13 @@ public class Spikes : MonoBehaviour
             if (hit.CompareTag("Player"))
             {
                 Player player = hit.GetComponent<Player>();
-
-                if (!player.invulnerable)
+                if (player.isAlive)
                 {
-                    player.TakeDamage(1);
-                    player.jump = true;
-                        
-
+                    if (!player.invulnerable)
+                    {
+                        player.TakeDamage(1);
+                        player.jump = true;
+                    }
                 }
             }
         }

@@ -15,8 +15,11 @@ public class PlayerAnimations : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        anim.SetBool("alive", controller2D.isAlive);        
         anim.SetFloat("speed", Mathf.Abs(controller2D.rb.velocity.x));
         anim.SetBool("jumping", controller2D.isJumping);
         anim.SetBool("falling", controller2D.isFalling);
+        
     }
 }

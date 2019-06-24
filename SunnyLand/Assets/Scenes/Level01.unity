@@ -1171,6 +1171,11 @@ PrefabInstance:
       propertyPath: vSpeed
       value: 16
       objectReference: {fileID: 0}
+    - target: {fileID: 7142785804977973987, guid: f9e767296be7bab4aa2c2fad6cd148c5,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e767296be7bab4aa2c2fad6cd148c5, type: 3}
 --- !u!4 &475258248 stripped

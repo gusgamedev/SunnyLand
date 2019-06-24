@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -46,6 +47,19 @@ public class GameManager : MonoBehaviour
         else if (gm != null)
             Destroy(gameObject);
     }
+
+    private void Update()
+    {
+        if (playerHealth <= 0)
+            Invoke("RestartLevel", 2f);
+
+    }
+
+    private void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    
 
    
 }

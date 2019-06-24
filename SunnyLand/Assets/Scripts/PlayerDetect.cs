@@ -26,16 +26,19 @@ public class PlayerDetect : MonoBehaviour
             {
                 Player player = hit.GetComponent<Player>();
 
-                if (!player.invulnerable && !enemy.invunerable)
+                if (player.isAlive)
                 {
-                    if (player.isFalling && (player.transform.position.y > transform.position.y))
+                    if (!player.invulnerable && !enemy.invunerable)
                     {
-                        enemy.TakeDamage(1);
-                        player.jump = true;
-                    }
-                    else
-                    {
-                        player.TakeDamage(1);
+                        if (player.isFalling && (player.transform.position.y > transform.position.y))
+                        {
+                            enemy.TakeDamage(1);
+                            player.jump = true;
+                        }
+                        else
+                        {
+                            player.TakeDamage(1);
+                        }
                     }
                 }
             }
