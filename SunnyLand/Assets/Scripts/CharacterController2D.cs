@@ -51,8 +51,7 @@ public class CharacterController2D : MonoBehaviour
             CheckColisions();
         }
         else
-        {
-            Debug.Log("aqui");
+        {            
             direction = 0;            
         }
     }
