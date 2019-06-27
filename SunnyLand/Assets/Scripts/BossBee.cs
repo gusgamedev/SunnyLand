@@ -6,7 +6,7 @@ using UnityEngine;
 public class BossBee : MonoBehaviour
 {
     public float timeToGoNextPoint = 1f;
-    public float speedAttack = 16f;
+    public float speedAttack = 25f;
     public float speedReturn = 20f;
 
     public Transform pointA;
@@ -23,12 +23,12 @@ public class BossBee : MonoBehaviour
     bool goToPointB = false;
     bool goToPointC = false;
 
+    bool facingRight = false;
+
     bool canAttack = false;
 
     public int movements = 3;
 
-    private IEnumerator courotine;
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -45,26 +45,26 @@ public class BossBee : MonoBehaviour
         MoveEnemy();
     }
 
-    void SpawnHive()
+    IEnumerator SpawnHive()
     {
-        var spawnPointList = spawnPoints.ToList();
+        List<int> spawnPointList = new List<int> { 0, 1, 2, 3 };
 
         for (int i = 0; i < spawnPoints.Length; i++)
         {
+            yield return new WaitForSeconds(0.8f);
             int index = Random.Range(0, spawnPointList.Count - 1);
+            Instantiate(hive, spawnPoints[spawnPointList[index]].position, Quaternion.identity);
+            print(spawnPoints[spawnPointList[index]]);
             spawnPointList.RemoveAt(index);
-            courotine = InstantiateHive(spawnPoints[index], Random.Range(1f, 2.5f));
-            StartCoroutine(courotine);
+            
         }
 
-        print("ataca novamente");
-    }
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
+        goToPointA = true;
+        nextPoint = pointA;
 
-    IEnumerator InstantiateHive(Transform spawnPosition, float waitTime)
-    {
-        yield return new WaitForSeconds(waitTime);
-        print("espaunou " + spawnPosition.position);
-        //Instantiate(hive, spawnPosition.position, Quaternion.identity);
+
     }
 
     void SetCanAttack()
@@ -80,9 +80,12 @@ public class BossBee : MonoBehaviour
         { 
             if (nextPoint.position.x == transform.position.x)
             {
+                canAttack = false;
+
                 //chegou no ponto A
                 if (goToPointA)
                 {
+                    Flip();
                     movements--;
                     goToPointA = false;
 
@@ -93,16 +96,21 @@ public class BossBee : MonoBehaviour
                         goToPointC = true;
                     }
                     else
-                    {
+                    {                        
                         nextPoint = pointB;
                         goToPointB = true;
                         goToPointC = false;
                     }
 
+                    Invoke("SetCanAttack", 1.3f);
+
+
+
                 }
                 //chegou no ponto B
                 else if (goToPointB)
                 {
+                    Flip();
                     movements--;
                     goToPointB = false;
 
@@ -113,11 +121,13 @@ public class BossBee : MonoBehaviour
                         goToPointC = true;
                     }
                     else
-                    {
+                    {  
                         nextPoint = pointA;
                         goToPointA = true;
                         goToPointC = false;
                     }
+
+                    Invoke("SetCanAttack", 1.3f);
                 }
                 //chegou no ponto C
                 else if (goToPointC)
@@ -128,11 +138,12 @@ public class BossBee : MonoBehaviour
 
                     //nextPoint = null;
 
-                    canAttack = false;
-                    movements = 3;
+                    movements = 4;
 
-                    Invoke("SpawnHive", 2f);
+                    StartCoroutine(SpawnHive());
                 }
+
+                
             }
             transform.position = Vector2.MoveTowards(transform.position, nextPoint.position, speedAttack * Time.deltaTime);
         }
@@ -140,8 +151,8 @@ public class BossBee : MonoBehaviour
 
     private void Flip()
     {
-        //facingRight = !facingRight;
-       // transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        facingRight = !facingRight;
+        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
 
     }
 }

@@ -384,18 +384,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToGoNextPoint: 1
-  speedAttack: 16
+  speedAttack: 25
   speedReturn: 20
   pointA: {fileID: 1145506963}
   pointB: {fileID: 995230004}
   pointC: {fileID: 215866428}
-  hive: {fileID: 0}
+  hive: {fileID: 165052112459927023, guid: 752dd15e6fa664c4585d80e788162be3, type: 3}
   spawnPoints:
   - {fileID: 1737553868}
   - {fileID: 838129108}
   - {fileID: 186844820}
   - {fileID: 1814130421}
-  spawnPointList: []
   movements: 3
 --- !u!212 &1347270618
 SpriteRenderer:
