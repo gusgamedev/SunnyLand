@@ -32,8 +32,9 @@ public class PlayerDetect : MonoBehaviour
                     {
                         if (player.isFalling && (player.transform.position.y > transform.position.y))
                         {
-                            enemy.TakeDamage(1);
                             player.jump = true;
+                            enemy.TakeDamage(1);
+                            
                         }
                         else
                         {

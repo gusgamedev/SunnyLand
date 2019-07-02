@@ -28,8 +28,7 @@ public class Player : CharacterController2D
         {
             if (isFalling && isOnFloor)
             {
-                Invoke("Dust", 0.05f);
-                AudioManager.am.PlayFx(3, AudioManager.am.audioClips[5]);
+                Invoke("Dust", 0.05f);                
             }
 
             if (Input.GetButtonDown("Jump") && isOnFloor)

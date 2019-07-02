@@ -5,12 +5,13 @@ using UnityEngine;
 public class PiranhaPlant : Enemy
 {
     [Header("Plant Properties")]
-    public float timeNextAttack = 2f;
+    public float timeNextAttack = 0.8f;
 
     private bool canAttack = true;
     public float playerDistance = 0f;
     private Transform target; 
     private Animator anim; 
+    private AudioSource attackFx; 
    
     // Update is called once per frame
 
@@ -18,12 +19,16 @@ public class PiranhaPlant : Enemy
     {
         target = GameObject.FindGameObjectWithTag("Player").transform;
         anim = GetComponent<Animator>();
+        attackFx = GetComponent<AudioSource>();
     }
     void Update()
     {
-
-        
         playerDistance = (target.position - transform.position).magnitude;
+
+        if ((transform.position.x > target.position.x && facingRight) || (transform.position.x < target.position.x && !facingRight)) 
+        {
+            Flip();        
+        } 
 
         if (playerDistance < 3f && canAttack)
         {
@@ -34,6 +39,7 @@ public class PiranhaPlant : Enemy
     private void Attack()
     {       
         canAttack = false;
+        attackFx.Play();
         anim.SetTrigger("Attack");        
         Invoke("SetCanAttack", timeNextAttack);
 
@@ -50,7 +56,7 @@ public class PiranhaPlant : Enemy
     private void Flip()
     {
         facingRight = !facingRight;
-        transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        transform.Rotate(0,180,0);
 
     }
 

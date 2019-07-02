@@ -34,6 +34,7 @@ public class Enemy : MonoBehaviour
     {
         if (!invunerable)
         {
+            invunerable = true;
             health -= damage;
             damageEffect.SetFlashDamage();
             AudioManager.am.PlayFx(2, AudioManager.am.audioClips[1]);
@@ -45,7 +46,7 @@ public class Enemy : MonoBehaviour
                 AudioManager.am.PlayFx(1, AudioManager.am.audioClips[0]);
             }
 
-            Invoke("SetInvulnerableFalse", 1f);
+            Invoke("SetInvulnerableFalse", 0.1f);
         }
     }
 
