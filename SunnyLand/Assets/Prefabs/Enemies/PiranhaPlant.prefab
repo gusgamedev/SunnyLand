@@ -160,7 +160,7 @@ MonoBehaviour:
   explosion: {fileID: 5446943098934073500, guid: fa826ce115c6fb64a874b1ff141754f9,
     type: 3}
   timeNextAttack: 0.8
-  playerDistance: 3.2
+  attackDistance: 2.6
 --- !u!114 &7109337379969778903
 MonoBehaviour:
   m_ObjectHideFlags: 0

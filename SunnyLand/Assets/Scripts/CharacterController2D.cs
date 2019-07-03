@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿
+using System.Collections;
+using UnityEngine;
 
 public class CharacterController2D : MonoBehaviour
 {
@@ -23,6 +25,7 @@ public class CharacterController2D : MonoBehaviour
     public bool onLeftWall = false;
     public bool facingRight = true;
     public bool jump = false;
+    public bool impulseEnemy = false;
   
     [Header("Collisions")]
     [SerializeField] private Vector2 bottomOffset = new Vector2(0, -0.5f);
@@ -57,8 +60,12 @@ public class CharacterController2D : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {        
-        rb.velocity = new Vector2(hSpeed * direction, rb.velocity.y);
+    {
+
+        if (isOnFloor)
+            rb.velocity = new Vector2(hSpeed * direction, rb.velocity.y);
+        else
+            rb.velocity = new Vector2((hSpeed*0.9f) * direction, rb.velocity.y);
                 
         if (jump)
         {
@@ -73,13 +80,16 @@ public class CharacterController2D : MonoBehaviour
 
     void BetterJump()
     {
-        if (rb.velocity.y < 0 && !isOnFloor)
+        if (!impulseEnemy)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump") && !isOnFloor)
-        {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            if (rb.velocity.y < 0 && !isOnFloor)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            }
+            else if (rb.velocity.y > 0 && !Input.GetButton("Jump") && !isOnFloor)
+            {
+                rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            }
         }
     }
 
@@ -110,7 +120,8 @@ public class CharacterController2D : MonoBehaviour
 
     private void CheckColisions()
     {
-        isOnFloor   = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
+        isOnFloor   = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer) &&
+            !isJumping;
         onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset,  collisionRadius, groundLayer);
         onLeftWall  = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset,   collisionRadius, groundLayer);
         
@@ -151,5 +162,19 @@ public class CharacterController2D : MonoBehaviour
             newPosition.y += -hit.normal.x * Mathf.Abs(rb.velocity.x) * Time.fixedDeltaTime * (rb.velocity.x - hit.normal.x > 0 ? 1 : -1);
             transform.position = newPosition;
         }
+    }
+
+
+    public void ImpulseEnemy()
+    {
+        jump = true;
+        impulseEnemy = true;
+        Invoke("StopImpulseEnemy", 0.5f);
+        
+    }
+
+    void StopImpulseEnemy()
+    {
+        impulseEnemy = false;
     }
 }

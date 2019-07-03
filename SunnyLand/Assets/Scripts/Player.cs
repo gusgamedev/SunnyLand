@@ -57,7 +57,7 @@ public class Player : CharacterController2D
             AudioManager.am.PlayFx(3, AudioManager.am.audioClips[1]);
             GameManager.gm.SetPlayerHealth(GameManager.gm.GetPlayerHealth() - damage);
             flashDamage.SetFlashDamage();
-            Invoke("SetInvulnerableFalse", 1f);
+            Invoke("SetInvulnerableFalse", 0.8f);
 
             if (GameManager.gm.GetPlayerHealth() <= 0)
                 PlayerDie();
@@ -75,4 +75,5 @@ public class Player : CharacterController2D
     {
         invulnerable = false;
     }
+
 }

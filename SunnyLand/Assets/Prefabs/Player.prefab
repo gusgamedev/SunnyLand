@@ -71,7 +71,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 5
+  m_Constraints: 4
 --- !u!114 &7142785804977973997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,10 +86,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   tr: {fileID: 0}
-  hSpeed: 9
+  hSpeed: 8
   vSpeed: 18
   fallMultiplier: 2
-  lowJumpMultiplier: 5
+  lowJumpMultiplier: 4
+  isAlive: 1
   isOnFloor: 0
   isJumping: 0
   isFalling: 0
@@ -97,10 +98,11 @@ MonoBehaviour:
   onLeftWall: 0
   facingRight: 1
   jump: 0
+  impulseEnemy: 0
   bottomOffset: {x: 0, y: -1}
   rightOffset: {x: 0.5, y: 0}
   leftOffset: {x: -0.5, y: 0}
-  collisionRadius: 0.3
+  collisionRadius: 0.33
   groundLayer:
     serializedVersion: 2
     m_Bits: 256

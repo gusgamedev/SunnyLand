@@ -5,10 +5,11 @@ using UnityEngine;
 public class PiranhaPlant : Enemy
 {
     [Header("Plant Properties")]
-    public float timeNextAttack = 0.8f;
+    public float timeNextAttack = 0.5f;
 
     private bool canAttack = true;
-    public float playerDistance = 0f;
+    private float playerDistance = 0f;
+    public float attackDistance = 3f;
     private Transform target; 
     private Animator anim; 
     private AudioSource attackFx; 
@@ -30,7 +31,7 @@ public class PiranhaPlant : Enemy
             Flip();        
         } 
 
-        if (playerDistance < 3f && canAttack)
+        if (playerDistance <= attackDistance && canAttack)
         {
             Attack();
         }
