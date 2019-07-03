@@ -23,7 +23,7 @@ public class Spikes : MonoBehaviour
                 {
                     if (!player.invulnerable)
                     {
-                        player.TakeDamage(1);
+                        player.TakeDamage(3);
                         player.jump = true;
                     }
                 }

@@ -32,7 +32,7 @@ public class PlayerDetect : MonoBehaviour
                     {
                         if (player.isFalling && (player.transform.position.y > transform.position.y))
                         {
-                            player.ImpulseEnemy();
+                            player.EnemyStomp();
                             enemy.TakeDamage(1);
                             
                         }

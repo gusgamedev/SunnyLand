@@ -164,17 +164,18 @@ public class CharacterController2D : MonoBehaviour
         }
     }
 
-
-    public void ImpulseEnemy()
+    public void EnemyStomp()
     {
+        StartCoroutine(Stomp());
+    }
+
+    IEnumerator Stomp(){
         jump = true;
         impulseEnemy = true;
-        Invoke("StopImpulseEnemy", 0.5f);
-        
+        yield return new WaitForSeconds(0.4f);
+        impulseEnemy = false;
+
     }
 
-    void StopImpulseEnemy()
-    {
-        impulseEnemy = false;
-    }
+
 }

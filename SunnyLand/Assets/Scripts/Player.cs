@@ -6,7 +6,8 @@ public class Player : CharacterController2D
 {
     [Header("Player Properties")]    
     [HideInInspector]  public bool invulnerable = false;
-
+    
+    
     [Header("Particles")]
     public ParticleSystem dust;
 
@@ -75,5 +76,10 @@ public class Player : CharacterController2D
     {
         invulnerable = false;
     }
+
+    
+
+
+
 
 }
