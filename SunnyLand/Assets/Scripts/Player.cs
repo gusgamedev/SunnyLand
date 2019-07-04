@@ -6,21 +6,15 @@ public class Player : CharacterController2D
 {
     [Header("Player Properties")]    
     [HideInInspector]  public bool invulnerable = false;
-    
-    
+       
     [Header("Particles")]
     public ParticleSystem dust;
 
     private FlashDamage flashDamage;    
-
-    private float walkSpeed;
-    private float runSpeed;
-    
+        
     private void Start()
     {
-        flashDamage = GetComponentInChildren<FlashDamage>();        
-        walkSpeed = hSpeed;
-        runSpeed = hSpeed + 3f; 
+        flashDamage = GetComponentInChildren<FlashDamage>();               
     }
 
     public override void Update()
@@ -34,11 +28,6 @@ public class Player : CharacterController2D
 
             if (Input.GetButtonDown("Jump") && isOnFloor)
                 AudioManager.am.PlayFx(3, AudioManager.am.audioClips[2]);
-
-            if (Input.GetButton("Run"))
-                hSpeed = runSpeed;
-            else if (Input.GetButtonUp("Run"))
-                hSpeed = walkSpeed;
         }
 
         base.Update();

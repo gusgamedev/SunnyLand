@@ -66,7 +66,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 2
   m_Material: {fileID: 6200000, guid: 9022667a51233c44ba10f2ffd3b3a632, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -86,10 +86,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
   tr: {fileID: 0}
-  hSpeed: 8
-  vSpeed: 18
-  fallMultiplier: 2
-  lowJumpMultiplier: 4
+  hSpeed: 9
+  vSpeed: 25
+  fallMultiplier: 0.6
+  lowJumpMultiplier: 2.8
   isAlive: 1
   isOnFloor: 0
   isJumping: 0
@@ -99,10 +99,10 @@ MonoBehaviour:
   facingRight: 1
   jump: 0
   impulseEnemy: 0
-  bottomOffset: {x: 0, y: -1}
+  bottomOffset: {x: 0, y: -1.15}
   rightOffset: {x: 0.5, y: 0}
   leftOffset: {x: -0.5, y: 0}
-  collisionRadius: 0.33
+  collisionRadius: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 256

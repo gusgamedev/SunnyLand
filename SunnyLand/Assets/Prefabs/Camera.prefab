@@ -44,7 +44,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 1
-  m_Offset: {x: 116.60495, y: -7.3415318}
+  m_Offset: {x: 116.85421, y: -7.3415318}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 245.70987, y: 52.226162}
+  m_Size: {x: 245.21135, y: 52.226162}
   m_EdgeRadius: 0
 --- !u!1 &1287314871
 GameObject:
@@ -209,15 +209,15 @@ CompositeCollider2D:
         Y: -334546112
       - X: 2394598883
         Y: 187715488
-      - X: -62499848
+      - X: -57514648
         Y: 187715459
-      - X: -62499819
+      - X: -57514619
         Y: -334546112
   m_CompositePaths:
     m_Paths:
     - - {x: 239.4599, y: 18.77155}
-      - {x: -6.2499847, y: 18.771545}
-      - {x: -6.249982, y: -33.454613}
+      - {x: -5.751465, y: 18.771545}
+      - {x: -5.751462, y: -33.454613}
       - {x: 239.4599, y: -33.454613}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.000005
@@ -286,12 +286,12 @@ MonoBehaviour:
   m_ScreenX: 0.44
   m_ScreenY: 0.52
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
+  m_DeadZoneWidth: 0.05
+  m_DeadZoneHeight: 0.1
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
+  m_SoftZoneWidth: 0.222
+  m_SoftZoneHeight: 0.4
   m_BiasX: 0
   m_BiasY: 0
   m_CenterOnActivate: 1
@@ -332,7 +332,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5994069391947259161}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.9916484, y: -1.7250003, z: 0}
+  m_LocalPosition: {x: 186.16, y: -1.7250003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5994069391839966204}
@@ -421,7 +421,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5994069393415928254}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.463753, y: -1.7250007, z: 0}
+  m_LocalPosition: {x: 186.16, y: -1.7250003, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1287314874}

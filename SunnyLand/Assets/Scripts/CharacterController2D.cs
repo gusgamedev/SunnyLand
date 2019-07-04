@@ -61,12 +61,11 @@ public class CharacterController2D : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         if (isOnFloor)
             rb.velocity = new Vector2(hSpeed * direction, rb.velocity.y);
         else
             rb.velocity = new Vector2((hSpeed*0.9f) * direction, rb.velocity.y);
-                
+
         if (jump)
         {
             rb.velocity = Vector2.up * vSpeed;
@@ -74,8 +73,7 @@ public class CharacterController2D : MonoBehaviour
         }
 
         if ((direction < 0 && facingRight) || (direction > 0 && !facingRight))
-            Flip();
-        
+            Flip();        
     }
 
     void BetterJump()
@@ -102,20 +100,14 @@ public class CharacterController2D : MonoBehaviour
     void AirControl()
     {
         if (rb.velocity.y > 0.1f && !isOnFloor)
-        {
             isJumping = true;
-            isFalling = false;
-        }
-        else if (rb.velocity.y < -0.1f && !isOnFloor)
-        {
+        else
             isJumping = false;
+
+        if (rb.velocity.y < -0.1f && !isOnFloor)
             isFalling = true;
-        }
-        else if (isOnFloor)
-        {
-            isJumping = false;
+        else
             isFalling = false;
-        }
     }
 
     private void CheckColisions()
@@ -145,8 +137,7 @@ public class CharacterController2D : MonoBehaviour
             // Verifica se está em uma inclinação
             if (hit && Mathf.Abs(hit.normal.x) > 0.1f)
             {
-                //Congelamos as constraints x e z do RigidBody2D 
-                //Rb constraint is a bitmask use | to marge properties freeze rotation and freeze poition 
+                //Congelamos as constraints x e z do RigidBody2D                 
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation | RigidbodyConstraints2D.FreezePositionX;
                 rb.velocity = Vector2.zero;
             }
@@ -155,12 +146,7 @@ public class CharacterController2D : MonoBehaviour
         {
             //Se está se movendo ou pulando descongelamos as constraints congelamos apenas a rotação Z
             rb.constraints = RigidbodyConstraints2D.None;
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-            //Move Player up or down to compensate for the slope below them
-            Vector3 newPosition = transform.position;
-            newPosition.y += -hit.normal.x * Mathf.Abs(rb.velocity.x) * Time.fixedDeltaTime * (rb.velocity.x - hit.normal.x > 0 ? 1 : -1);
-            transform.position = newPosition;
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;            
         }
     }
 
@@ -169,12 +155,12 @@ public class CharacterController2D : MonoBehaviour
         StartCoroutine(Stomp());
     }
 
-    IEnumerator Stomp(){
+    IEnumerator Stomp()
+    {
         jump = true;
         impulseEnemy = true;
         yield return new WaitForSeconds(0.4f);
         impulseEnemy = false;
-
     }
 
 
